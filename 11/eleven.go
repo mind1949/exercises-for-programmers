@@ -18,7 +18,7 @@ func getFloatInput(ques string) (retInput float64) {
 		}
 		input = strings.TrimSpace(input)
 		retInput, err = strconv.ParseFloat(input, 64)
-		if err != nil  || retInput <= 0 {
+		if err != nil || retInput <= 0 {
 			continue
 		}
 		undone = false
