@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"github.com/mind1949/getinput"
 )
 
 func calTax(orderAmount float64, state string) float64 {
 	var taxRate float64
-	if state == "WI" {
+	state = strings.ToLower(state)
+	if state == "wi" {
 		taxRate = 5.5
 	}
 	tax := orderAmount * taxRate / 100
