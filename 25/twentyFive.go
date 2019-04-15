@@ -13,15 +13,15 @@ func isGreaterThanEight(s string) bool {
 // 下面的isInclude*函数需要用正则表达式：
 
 func isIncludeNumber(s string) bool {
-	
+	// ToDo(使用正则表达式)
 }
 
 func isIncludeSpecialCharater(s string) bool {
-
+	// ToDo(使用正则表达式)
 }
 
 func isIncludeAlphabetCharater(s string) bool {
-
+	// ToDo(使用正则表达式)
 }
 
 func main() {
