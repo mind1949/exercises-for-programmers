@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/mind1949/getinput"
+	"regexp"
 )
 
 type isValider interface {
@@ -24,15 +25,15 @@ func (_lastName lastName) isValid() bool {
 type zip string
 
 func (_zip zip) isValid() bool {
-	// ToDo(用正则实现判断）
-	return false
+	regex := regexp.MustCompile(`\A[0-9]{2,6}\z`)
+	return regex.MatchString(string(_zip))
 }
 
 type employId string
 
 func (_employId employId) isValid() bool {
-	// ToDo(用正则实现判断)
-	return false
+	regex := regexp.MustCompile(`\A[A-Za-z]{2}-[0-9]{4}\z`)
+	return regex.MatchString(string(_employId))
 }
 
 func main() {
