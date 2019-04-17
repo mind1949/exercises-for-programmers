@@ -43,7 +43,7 @@ func prompt(msg string) (input string) {
 func getEmployee() (employeeName string) {
 	_employeeName := prompt("enter an employee name to remove: ")
 
-	if findIndex(employees, _employeeName) < 0 {
+	if !isContain(employees, _employeeName) {
 		fmt.Println("Sorry, this employee is not exist.(please enter again)")
 		return getEmployee()
 	}
@@ -63,13 +63,20 @@ var findIndex = func(s []string, element string) (index int) {
 	return
 }
 
-func deleteEmployee(employee string) {
-
-	remove := func(s []string, index int) []string {
-		copy(s[index:], s[index+1:])
-		return s[:len(s)-1]
+var isContain = func(slice []string, element string) bool {
+	index := findIndex(slice, element)
+	if index > 0 {
+		return true
 	}
+	return false
+}
 
+var remove = func(s []string, index int) []string {
+	copy(s[index:], s[index+1:])
+	return s[:len(s)-1]
+}
+
+func deleteEmployee(employee string) {
 	employeeIndex := findIndex(employees, employee)
 	employees = remove(employees, employeeIndex)
 }
