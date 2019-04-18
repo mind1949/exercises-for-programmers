@@ -1,22 +1,22 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
-	"os"
-	"strings"
-	"strconv"
+	"fmt"
 	"math/rand"
+	"os"
+	"strconv"
+	"strings"
 	"time"
 )
 
 type dataSource struct {
-	Numbers []rune
+	Numbers          []rune
 	SpecialCharaters []rune
 }
 
-var ds = dataSource {
-	Numbers: []rune("0123456789"),
+var ds = dataSource{
+	Numbers:          []rune("0123456789"),
 	SpecialCharaters: []rune("!@#$%^&*?:"),
 }
 
@@ -43,15 +43,15 @@ func getcount(msg string) (count int) {
 	return count
 }
 
-func charatersSlice(count int, t string) (_charatersSlice []rune)  {
+func charatersSlice(count int, t string) (_charatersSlice []rune) {
 	dataSlices := map[string][]rune{
-		"numbers": ds.Numbers,
+		"numbers":          ds.Numbers,
 		"specialCharaters": ds.SpecialCharaters,
 	}
 	dataSlice := dataSlices[t]
 
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	for i := 1; i <= count; i ++ {
+	for i := 1; i <= count; i++ {
 		number := dataSlice[r.Intn(len(dataSlice))]
 		_charatersSlice = append(_charatersSlice, number)
 	}
@@ -89,7 +89,7 @@ func main() {
 	specialCharatersCount := getcount("How many special charaters ?")
 	numbersCount := getcount("How many numbers ?")
 
-	if minLength < specialCharatersCount + numbersCount {
+	if minLength < specialCharatersCount+numbersCount {
 		fmt.Println("minimu length must be greater than special charaters count and numbers count!")
 		os.Exit(1)
 	}
@@ -98,7 +98,3 @@ func main() {
 
 	fmt.Println("your password is:\n", password)
 }
-
-
-
-
