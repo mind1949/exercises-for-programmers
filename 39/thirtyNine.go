@@ -1,12 +1,8 @@
 package main
 
 import (
-	"sort"
 	"fmt"
-	//	"os"
-	//	"bufio"
-	//	"strings"
-	//	"strconv"
+	"sort"
 )
 
 type Name struct {
@@ -20,8 +16,8 @@ func (name Name) fullName() (_fullName string) {
 
 type User struct {
 	Name
-	Position      string
-	SepartionData string
+	Position       string
+	SeparationData string
 }
 
 var users []User
@@ -56,9 +52,15 @@ func (us byName) Swap(i, j int) {
 
 func (us byName) Sort() { sort.Sort(us) }
 
+func output() {
+	fmt.Println("Name\t| Position\t| Separation Date")
+	fmt.Println("----\t|---------\t|----------------")
+	for _, user := range users {
+		fmt.Printf("%s\t | %s\t | %s\t\n", user.fullName(), user.Position, user.SeparationData)
+	}
+}
+
 func main() {
 	byName(users).Sort()
-	for _, user := range users {
-		fmt.Println(user.fullName())
-	}
+	output()
 }
