@@ -60,9 +60,7 @@ func parseRow(row string) (staff Staff) {
 
 func dollarize(s string) (retS string) {
 	_slice := []rune(s)
-	for i, j := 0, len(_slice)-1; i < j; i, j = i+1, j-1 {
-		_slice[i], _slice[j] = _slice[j], _slice[i]
-	}
+	reverse(_slice)
 
 	var slice []rune
 	for i, v := range _slice {
@@ -71,13 +69,16 @@ func dollarize(s string) (retS string) {
 			slice = append(slice, ',')
 		}
 	}
-
-	for i, j := 0, len(slice)-1; i < j; i, j = i+1, j-1 {
-		slice[i], slice[j] = slice[j], slice[i]
-	}
+	reverse(slice)
 
 	retS = "$" + string(slice)
 	return
+}
+
+func reverse(s []rune) []rune {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
 }
 
 func output(staffs []Staff) {
