@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 )
 
@@ -12,7 +11,7 @@ type Name struct{ FirstName, LastName string }
 
 type Staff struct {
 	Name
-	Salary int
+	Salary string
 }
 
 func main() {
@@ -54,16 +53,37 @@ func parseRow(row string) (staff Staff) {
 	}
 	staff.LastName = rowSlice[0]
 	staff.FirstName = rowSlice[1]
-	_Salary, err := strconv.Atoi(rowSlice[2])
-	staff.Salary = _Salary
-	check(err)
+	staff.Salary = dollarize(rowSlice[2])
+
+	return
+}
+
+func dollarize(s string) (retS string) {
+	_slice := []rune(s)
+	for i, j := 0, len(_slice)-1; i < j; i, j = i+1, j-1 {
+		_slice[i], _slice[j] = _slice[j], _slice[i]
+	}
+
+	var slice []rune
+	for i, v := range _slice {
+		slice = append(slice, v)
+		if i%3 == 0 && i > 0 && i < len(_slice)-1 {
+			slice = append(slice, ',')
+		}
+	}
+
+	for i, j := 0, len(slice)-1; i < j; i, j = i+1, j-1 {
+		slice[i], slice[j] = slice[j], slice[i]
+	}
+
+	retS = "$" + string(slice)
 	return
 }
 
 func output(staffs []Staff) {
 	fmt.Println("Last First Salary\n------------")
 	for _, staff := range staffs {
-		fmt.Printf("%s %s %d\n", staff.LastName, staff.FirstName, staff.Salary)
+		fmt.Printf("%s %s %s\n", staff.LastName, staff.FirstName, staff.Salary)
 	}
 }
 
