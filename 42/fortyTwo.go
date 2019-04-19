@@ -17,12 +17,23 @@ type Staff struct {
 
 func main() {
 	rows := readAndParse("data.csv")
+	rows = filter(rows)
 	var staffs =  make([]Staff, len(rows))
 	for i, row := range rows {
 		staffs[i] = parseRow(row)
 	}
 
 	output(staffs)
+}
+
+func filter(slice []string) []string {
+	retSlice := make([]string, 0, len(slice))
+	for _, element := range slice {
+		if strings.Count(element, ", ") == 2 {
+			retSlice = append(retSlice, element)
+		}
+	}
+	return retSlice
 }
 
 func readAndParse(fileName string) (rows []string) {
@@ -50,7 +61,7 @@ func parseRow(row string) (staff Staff) {
 }
 
 func output(staffs []Staff) {
-	fmt.Println("Last First Salary")
+	fmt.Println("Last First Salary\n------------")
 	for _, staff := range staffs {
 		fmt.Printf("%s %s %d\n", staff.LastName, staff.FirstName, staff.Salary)
 	}
