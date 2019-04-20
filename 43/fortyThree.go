@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 )
